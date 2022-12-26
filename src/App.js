@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-wrap-multilines */
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ProtectedRouts from "./Components/ProtectedRouts/ProtectedRouts";
-import SignupProtecter from "./Components/ProtectedRouts/SignupProtecter";
-import Home from "./Pages/Home/Home";
-import SignupAndLogin from "./Pages/SignupAndLogin/SignupAndLogin";
+import ProtectedRouts from "./components/ProtectedRouts/ProtectedRouts";
+import SignupProtecter from "./components/ProtectedRouts/SignupProtecter";
+import Home from "./pages/Home/Home";
+import SignupAndLogin from "./pages/SignupAndLogin/SignupAndLogin";
 
 function App() {
   return (

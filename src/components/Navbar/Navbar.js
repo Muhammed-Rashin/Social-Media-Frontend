@@ -1,6 +1,6 @@
 import React from "react";
 import "./Navbar.css";
-import image from "../../DummyData/images/profile-1.jpg";
+import image from "../../assets/dummyData/images/profile-1.jpg";
 
 function Navbar() {
   return (
@@ -16,7 +16,7 @@ function Navbar() {
             <label className="btn btn-primary" htmlFor="create-post">
               Create
             </label>
-            <div className="profile-photo">
+            <div className="profile-pic">
               <img src={image} alt="" />
             </div>
           </div>

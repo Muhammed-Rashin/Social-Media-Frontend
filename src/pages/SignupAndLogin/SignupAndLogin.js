@@ -21,7 +21,6 @@ function SignupAndLogin() {
 
   const doLogin = async () => {
     const response = await instance.post("/login", loginData);
-    console.log(response);
     response.data.status
       ? navigate("/")
       : toast.error("Incorrect Email Or Password");
