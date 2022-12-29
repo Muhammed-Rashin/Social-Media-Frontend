@@ -1,17 +1,19 @@
 /* eslint-disable react/jsx-wrap-multilines */
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ProtectedRouts from "./components/ProtectedRouts/ProtectedRouts";
-import SignupProtecter from "./components/ProtectedRouts/SignupProtecter";
-import Home from "./pages/Home/Home";
-import SignupAndLogin from "./pages/SignupAndLogin/SignupAndLogin";
+import React from 'react';
+import './app.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import ProtectedRouts from './components/ProtectedRouts/ProtectedRouts';
+import SignupProtecter from './components/ProtectedRouts/SignupProtecter';
+import Home from './pages/Home/Home';
+import SignupAndLogin from './pages/SignupAndLogin/SignupAndLogin';
+import Profile from './pages/Profile/Profile';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route
-          path="/"
+          path='/'
           element={
             <ProtectedRouts>
               <Home />
@@ -19,11 +21,20 @@ function App() {
           }
         />
         <Route
-          path="/signup"
+          path='/signup'
           element={
             <SignupProtecter>
               <SignupAndLogin />
             </SignupProtecter>
+          }
+        />
+
+        <Route
+          path='/profile'
+          element={
+            <ProtectedRouts>
+              <Profile />
+            </ProtectedRouts>
           }
         />
       </Routes>

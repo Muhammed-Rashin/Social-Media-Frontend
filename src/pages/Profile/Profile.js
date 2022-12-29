@@ -1,16 +1,9 @@
-/* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
-import './Home.css';
+import React from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import Sidebar from '../../components/Sidebar/Sidebar';
-import Stories from '../../components/Stories/Stories';
-import CreatPost from '../../components/CreatPost/CreatPost';
-import Posts from '../../components/Posts/Posts';
-import Massages from '../../components/Massages/Massages';
-import FriendRequests from '../../components/FriendRequests/FriendRequests';
+import './Profile.css';
 
-function Home() {
-  const [posts, setPosts] = useState([]);
+function Profile() {
   const elements = [
     {
       text: 'Home',
@@ -46,17 +39,13 @@ function Home() {
     <div>
       <Navbar />
       <main>
-        <div className='container'>
+        <div className='profile-container'>
           <Sidebar elements={elements} create profile />
-          <div className='middle'>
-            <Stories />
-            <CreatPost setPosts={setPosts} />
-            <Posts posts={posts} setPosts={setPosts} />
-          </div>
-
-          <div className='right'>
-            <Massages />
-            <FriendRequests />
+          <div className='profile-container'>
+            <div className='banner-image'>
+              <div className='profile-image' />
+              <h3>Rashin</h3>
+            </div>
           </div>
         </div>
       </main>
@@ -64,4 +53,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Profile;

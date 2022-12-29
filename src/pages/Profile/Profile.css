@@ -1,0 +1,50 @@
+.profile-container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+main .profile-container {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 18vw auto 20vw;
+  position: relative;
+}
+
+main .container .left {
+  height: max-content;
+  position: sticky;
+  top: var(--sticky-top-left);
+}
+
+main .container .left .profle {
+  padding: var(--card-padding);
+  background: var(--color-white);
+  border-radius: var(--card-border-radius);
+  display: flex;
+  align-items: center;
+  column-gap: 1rem;
+  width: 100%;
+}
+
+.banner-image {
+  background-image: url('https://img.freepik.com/premium-vector/hand-painted-background-violet-orange-colours_23-2148427578.jpg?w=2000');
+  width: 300%;
+  height: 22vh;
+  position: relative;
+}
+
+.profile-image {
+  background-image: url('https://shotkit.com/wp-content/uploads/2021/06/cool-profile-pic-matheus-ferrero.jpeg');
+  background-size: cover;
+  border-radius: 50px;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  bottom: -12%;
+  left: 5%;
+}
+.banner-image h3 {
+position: absolute;
+bottom: -12%;
+left: 5%;
+}
