@@ -8,13 +8,16 @@ import CreatPost from '../../components/CreatPost/CreatPost';
 import Posts from '../../components/Posts/Posts';
 import Massages from '../../components/Massages/Massages';
 import FriendRequests from '../../components/FriendRequests/FriendRequests';
+import Chat from '../../components/Chat/Chat';
 
 function Home() {
   const [posts, setPosts] = useState([]);
+  const [openChat, setOpenChat] = useState(false);
   const elements = [
     {
       text: 'Home',
       icon: 'uil uil-home',
+      path: '/',
     },
     {
       text: 'Explore',
@@ -46,20 +49,23 @@ function Home() {
     <div>
       <Navbar />
       <main>
-        <div className='container'>
+        <button onClick={() => setOpenChat(true)}>Open Chat</button>
+
+        <div className="container">
           <Sidebar elements={elements} create profile />
-          <div className='middle'>
+          <div className="middle">
             <Stories />
             <CreatPost setPosts={setPosts} />
             <Posts posts={posts} setPosts={setPosts} />
           </div>
 
-          <div className='right'>
+          <div className="right">
             <Massages />
             <FriendRequests />
           </div>
         </div>
       </main>
+      <Chat openChat={openChat} setOpenChat={setOpenChat}/>
     </div>
   );
 }

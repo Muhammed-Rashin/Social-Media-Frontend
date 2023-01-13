@@ -27,24 +27,174 @@ main .container .left .profle {
 }
 
 .banner-image {
-  background-image: url('https://img.freepik.com/premium-vector/hand-painted-background-violet-orange-colours_23-2148427578.jpg?w=2000');
   width: 300%;
-  height: 22vh;
+  height: 26vh;
   position: relative;
+  display: flex;
+  border-bottom: 1px solid rgb(171, 168, 168);
 }
 
-.profile-image {
-  background-image: url('https://shotkit.com/wp-content/uploads/2021/06/cool-profile-pic-matheus-ferrero.jpeg');
-  background-size: cover;
-  border-radius: 50px;
-  width: 100px;
-  height: 100px;
+.banner-image h3 {
   position: absolute;
   bottom: -12%;
   left: 5%;
 }
-.banner-image h3 {
-position: absolute;
-bottom: -12%;
-left: 5%;
+
+.circle {
+  height: 150px;
+  width: 150px;
+  background-color: #000;
+  transition: all 0.5s;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  border-radius: 80px;
+}
+.circle img {
+  object-fit: cover;
+}
+.circle input{
+  position: absolute;
+  width: 1200px;
+  height: 1200px;
+  z-index: 2;
+  cursor: pointer;
+}
+
+
+.circle:hover {
+  /* height: 130px;
+  width: 130px; */
+  background-color: #000;
+  text-align: center;
+  /* border-radius:30% 70% 70% 30% / 30% 30% 70% 70% ; */
+}
+
+.circle .social {
+  list-style: none;
+  position: absolute;
+  display: flex;
+  bottom: -100px;
+  left: 50px;
+  transition: all 0.5s;
+  text-align: center;
+}
+
+.circle .social li {
+  margin: 10px;
+  height: 13px;
+  width: 13px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+.circle:hover .social {
+  bottom: 55px;
+  left: 55px;
+}
+.profile-image {
+  width: 35%;
+  display: flex;
+  justify-content: center;
+  padding-top: 22px;
+}
+.details {
+  width: 65%;
+  height: 100%;
+  margin-top: 2%;
+}
+
+.details button {
+  background-color: #6b4ce6;
+  margin-right: 60px;
+}
+
+.details button:hover {
+  opacity: 0.8;
+}
+.user-options {
+  height: 20%;
+  width: 48%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 3%;
+}
+.user-details {
+  height: 20%;
+  width: 53%;
+  display: flex;
+  justify-content: space-between;
+}
+.gallery {
+  /* margin-left: 5%; */
+  margin-top: 2%;
+  width: 150%;
+  height: 100%;
+  /* padding: 20px; */
+  display: flex;
+  flex-wrap: wrap;
+  /* background-color: red; */
+}
+.postsImgaes {
+  width: 31%;
+  height: 35%;
+  margin: 10px;
+  transition: all 0.5s;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+.postsImgaes img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background-color: black;
+}
+.properties {
+  list-style: none;
+  position: absolute;
+  display: flex;
+  bottom: -100px;
+  /* bottom: 10px; */
+  left: 47%;
+  transition: all 0.5s;
+  text-align: center;
+}
+.properties li {
+  margin-right: 55px;
+  height: 13px;
+  width: 13px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 20px;
+}
+.postsImgaes:hover {
+  -webkit-filter: brightness(70%);
+}
+
+.postsImgaes:hover .properties {
+  bottom: 50%;
+}
+.postsImgaes .caption {
+  list-style: none;
+  position: absolute;
+  display: flex;
+  bottom: -100px;
+  left: 37%;
+  transition: all 0.5s;
+  text-align: center;
+  color: white;
+}
+.postsImgaes:hover .caption {
+  top: 7%;
 }

@@ -58,7 +58,7 @@ function CreatPost({ setPosts }) {
         </div>
         <input
           type='text'
-          placeholder="What's on your mind Chirag?"
+          placeholder="What's on your mind ?"
           id='create-post'
         />
         <input

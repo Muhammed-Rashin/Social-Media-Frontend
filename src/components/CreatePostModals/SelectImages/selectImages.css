@@ -28,7 +28,7 @@
     text-align: center;
     margin-top: 35%;
   }
-  input[type='file'] {
+  .imageSelectionInput {
     display: none;
   }
   

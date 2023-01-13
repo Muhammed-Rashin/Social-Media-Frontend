@@ -1,36 +1,40 @@
 import React, { useState } from 'react';
 import './Sidebar.css';
 import image from '../../assets/dummyData/images/profile-7.jpg';
+import { useNavigate } from 'react-router-dom';
 
 function Sidebar({ elements, create, profile }) {
+  const navigate = useNavigate();
   const [active, setActive] = useState();
   return (
     <div>
-      <div className='left'>
+      <div className="left">
         {profile ? (
-          <a href='/#' className='profile'>
-            <div className='profile-pic'>
-              <img src={image} alt='' />
+          <a href="/#" className="profile">
+            <div className="profile-pic">
+              <img src={image} alt="" />
             </div>
-            <div className='handle'>
+            <div className="handle">
               <h4>Muhammed Rashin</h4>
-              <p className='text-muted'>@rash</p>
+              <p className="text-muted">@rash</p>
             </div>
           </a>
         ) : null}
 
-        <div className='sidebar'>
+        <div className="sidebar">
           {elements.map((element) => (
             <a
-              href='/#'
               className={`menu-item ${active === element && 'active'}`}
               key={element.text}
-              onClick={() => setActive(element)}
+              onClick={() => {
+                navigate(element.path)
+                setActive(element);
+              }}
             >
               <span>
                 {element.count ? (
                   <i className={element.icon}>
-                    <small className='notification-count'>
+                    <small className="notification-count">
                       {element.count}
                     </small>
                   </i>
@@ -44,7 +48,7 @@ function Sidebar({ elements, create, profile }) {
         </div>
 
         {create ? (
-          <label htmlFor='create-post' className='btn btn-primary'>
+          <label htmlFor="create-post" className="btn btn-primary">
             Create
           </label>
         ) : null}

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import instance from '../../api/axios';
 import './Navbar.css';
 import { PersonAdd, Settings, Logout } from '@mui/icons-material';
 import {
@@ -12,9 +13,12 @@ import {
   Menu,
 } from '@mui/material';
 import image from '../../assets/dummyData/images/profile-1.jpg';
+import FollowButton from '../FollowButton/FollowButton';
 
 function Navbar() {
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
+  const [search, setSearch] = useState(false);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -22,27 +26,46 @@ function Navbar() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const doSearch = () => {
+    const searchKey = document.getElementById('search-users').value;
+    if (searchKey === '') setSearch(false);
+    else {
+      instance
+        .post('/searchUsers', { searchValue: searchKey })
+        .then(({ data }) => {
+          console.log(data);
+          setSearch(data);
+        });
+    }
+  };
   return (
     <div>
       <nav>
-        <div className='container'>
-          <h2 className='logo'>Social Media</h2>
-          <div className='search-bar'>
-            <i className='uil uil-search' />
-            <input type='search' placeholder='Search For Something..' />
+        <div className="container">
+          <h2 className="logo">Social Media</h2>
+          <div className="search-bar">
+            <i className="uil uil-search" />
+            <input
+              onChange={() => {
+                doSearch();
+              }}
+              type="search"
+              placeholder="Search For Users.."
+              id="search-users"
+            />
           </div>
-          <div className='create'>
-            <label className='btn btn-primary' htmlFor='create-post'>
+          <div className="create">
+            <label className="btn btn-primary" htmlFor="create-post">
               Create
             </label>
             <div>
-              <Tooltip title='Account settings'>
+              <Tooltip title="Account settings">
                 <IconButton
                   onClick={handleClick}
-                  size='small'
+                  size="small"
                   sx={{ ml: 2 }}
                   aria-controls={open ? 'account-menu' : undefined}
-                  aria-haspopup='true'
+                  aria-haspopup="true"
                   aria-expanded={open ? 'true' : undefined}
                 >
                   <Avatar sx={{ width: 38, height: 38 }} src={image} />
@@ -50,7 +73,7 @@ function Navbar() {
               </Tooltip>
               <Menu
                 anchorEl={anchorEl}
-                id='account-menu'
+                id="account-menu"
                 open={open}
                 onClose={handleClose}
                 onClick={handleClose}
@@ -83,7 +106,7 @@ function Navbar() {
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
               >
-                <Link to='/profile' className='link'>
+                <Link to="/profile" className="link">
                   <MenuItem>
                     <Avatar src={image} />
                     Profile
@@ -96,19 +119,19 @@ function Navbar() {
                 <Divider />
                 <MenuItem>
                   <ListItemIcon>
-                    <PersonAdd fontSize='small' />
+                    <PersonAdd fontSize="small" />
                   </ListItemIcon>
                   Add another account
                 </MenuItem>
                 <MenuItem>
                   <ListItemIcon>
-                    <Settings fontSize='small' />
+                    <Settings fontSize="small" />
                   </ListItemIcon>
                   Settings
                 </MenuItem>
                 <MenuItem>
                   <ListItemIcon>
-                    <Logout fontSize='small' />
+                    <Logout fontSize="small" />
                   </ListItemIcon>
                   Logout
                 </MenuItem>
@@ -117,6 +140,57 @@ function Navbar() {
           </div>
         </div>
       </nav>
+
+      <div className={`search-result ${search ? null : 'hide-search-result'}`}>
+        {search === 'nothing' ? (
+          <h1 className="mt-5">No Result Found</h1>
+        ) : search === false ? null : (
+          search.map((result) => {
+            return (
+              <div
+                key={result._id}
+                className="results"
+                onClick={() => {
+                  setSearch(false);
+                  navigate('/profile?id=' + result._id);
+                }}
+              >
+                <div className="search-details">
+                  <div className="result-profile-image">
+                    <img
+                      src={
+                        result.profileImg
+                          ? result.profileImg
+                          : 'https://www.pngall.com/wp-content/uploads/5/Profile-PNG-File.png'
+                      }
+                      alt=""
+                    />
+                  </div>
+                  <div className="result-details">
+                    <span>
+                      <b>{result.username}</b>
+                    </span>
+                    {result.firstName || result.lastName ? (
+                      <span>{result.firstName + ' ' + result.lastName}</span>
+                    ) : null}
+                  </div>
+                </div>
+                <div className="follow-button">
+                  {result.followed ? (
+                    <FollowButton id={result._id} func={doSearch} />
+                  ) : (
+                    <FollowButton
+                      type={'follow'}
+                      id={result._id}
+                      func={doSearch}
+                    />
+                  )}
+                </div>
+              </div>
+            );
+          })
+        )}
+      </div>
     </div>
   );
 }

@@ -31,8 +31,9 @@ function SelectImages({ open, setOpen, setImage }) {
           </label>
           <input
             id='file-upload'
+            accept="image/*"
             type='file'
-            className='w-1/3'
+            className='w-1/3 imageSelectionInput'
             onChange={(event) => setImage(event.target.files[0])}
           />
         </div>

@@ -6,14 +6,14 @@ import ProtectedRouts from './components/ProtectedRouts/ProtectedRouts';
 import SignupProtecter from './components/ProtectedRouts/SignupProtecter';
 import Home from './pages/Home/Home';
 import SignupAndLogin from './pages/SignupAndLogin/SignupAndLogin';
-import Profile from './pages/Profile/Profile';
+import Profile from './pages/Profile/ProfilePage';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route
-          path='/'
+          path="/"
           element={
             <ProtectedRouts>
               <Home />
@@ -21,16 +21,15 @@ function App() {
           }
         />
         <Route
-          path='/signup'
+          path="/signup"
           element={
             <SignupProtecter>
               <SignupAndLogin />
             </SignupProtecter>
           }
         />
-
         <Route
-          path='/profile'
+          path="/profile"
           element={
             <ProtectedRouts>
               <Profile />

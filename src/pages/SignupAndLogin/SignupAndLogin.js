@@ -21,6 +21,7 @@ function SignupAndLogin() {
 
   const doLogin = async () => {
     const response = await instance.post('/login', loginData);
+    console.log(response);
     response.data.status
       ? navigate('/')
       : toast.error('Incorrect Email Or Password');
@@ -32,7 +33,6 @@ function SignupAndLogin() {
         <source src={background} type='video/mp4' />
       </video>
 
-      <h2 className='sign-h2'>Weekly Coding Challenge #1: Sign in/up Form</h2>
       <div
         className={`parent ${toggle && 'right-panel-active'}`}
         id='container'
