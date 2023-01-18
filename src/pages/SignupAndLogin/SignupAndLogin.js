@@ -16,7 +16,8 @@ function SignupAndLogin() {
 
   const doSignup = async () => {
     const response = await instance.post('/signup', signUpData);
-    if (response.data.isAuth) {
+    if (response.data.Accesstoken) {
+      localStorage.setItem('Accesstoken', response.data.Accesstoken);
       localStorage.setItem('id', response.data.id);
       navigate('/');
     } else toast.error('Sorry,Error While Sign Up');
@@ -25,7 +26,8 @@ function SignupAndLogin() {
   const doLogin = async () => {
     const response = await instance.post('/login', loginData);
 
-    if (response.data.status) {
+    if (response.data.Accesstoken) {
+      localStorage.setItem('Accesstoken', response.data.Accesstoken);
       localStorage.setItem('id', response.data.id);
       navigate('/');
     } else toast.error('Incorrect Email Or Password');
