@@ -19,7 +19,7 @@ function SignupAndLogin() {
     if (response.data.Accesstoken) {
       localStorage.setItem('Accesstoken', response.data.Accesstoken);
       localStorage.setItem('id', response.data.id);
-      navigate('/');
+      window.location = '/';
     } else toast.error('Sorry,Error While Sign Up');
   };
 
@@ -29,7 +29,7 @@ function SignupAndLogin() {
     if (response.data.Accesstoken) {
       localStorage.setItem('Accesstoken', response.data.Accesstoken);
       localStorage.setItem('id', response.data.id);
-      navigate('/');
+      window.location = '/';
     } else toast.error('Incorrect Email Or Password');
   };
 
