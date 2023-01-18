@@ -46,7 +46,7 @@ function Chat({ openChat, setOpenChat }) {
   }, [currentUser]);
 
   const confChat = () => {
-    socket.current = io('http://localhost:7000');
+    socket.current = io('http://13.231.164.178:7000');
     socket.current.emit('new-user-add', userId);
     socket.current.on('get-users', (users) => {
       setOnlineUsers(users);
