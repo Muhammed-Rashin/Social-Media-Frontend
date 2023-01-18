@@ -39,7 +39,7 @@ function Posts({ posts, setPosts }) {
             <div className="head">
               <div className="user">
                 <div className="profile-pic">
-                  <img src={profile} alt="" />
+                  <img src={element.userId.profileImg?element.userId.profileImg:'https://www.pngall.com/wp-content/uploads/5/Profile-PNG-File.png'} alt="" />
                 </div>
                 <div className="info">
                   <h3>{element.userId.username}</h3>

@@ -63,6 +63,9 @@
   #frame #sidepanel #profile.expanded .wrap p {
     margin-top: 20px;
   }
+  #frame .wrap i{
+    cursor: pointer;
+  }
   #frame #sidepanel #profile.expanded .wrap i.expand-button {
     -moz-transform: scaleY(-1);
     -o-transform: scaleY(-1);
@@ -363,7 +366,7 @@
     border-radius: 3px;
     color: #f5f5f5;
     padding: 7px;
-    width: calc(100% - 43px);
+    width: calc(107% - 43px);
   }
   #frame #sidepanel #profile .wrap #expanded input:focus {
     outline: none;
@@ -386,7 +389,7 @@
   #frame #sidepanel #search input {
     font-family: 'proxima-nova', 'Source Sans Pro', sans-serif;
     padding: 10px 0 10px 46px;
-    width: calc(100% - 25px);
+    width: calc(107% - 25px);
     border: none;
     background: #32465a;
     color: #f5f5f5;
@@ -427,7 +430,7 @@
   }
   #frame #sidepanel #contacts::-webkit-scrollbar {
     width: 8px;
-    background: #2c3e50;
+
   }
   #frame #sidepanel #contacts::-webkit-scrollbar-thumb {
     background-color: #243140;
@@ -627,7 +630,7 @@
     height: auto;
     min-height: calc(100% - 93px);
     max-height: calc(100% - 93px);
-    overflow-y: scroll;
+    overflow-y: scroll !important;
     overflow-x: hidden;
   }
   @media screen and (max-width: 735px) {
@@ -653,18 +656,18 @@
   #frame .content .messages ul li:nth-last-child(1) {
     margin-bottom: 20px;
   }
-  #frame .content .messages ul li.sent img {
+  #frame .content .messages ul li.replies img {
     margin: 6px 8px 0 0;
   }
-  #frame .content .messages ul li.sent p {
+  #frame .content .messages ul li.replies p {
     background: #435f7a;
     color: #f5f5f5;
   }
-  #frame .content .messages ul li.replies img {
+  #frame .content .messages ul li.sent img {
     float: right;
     margin: 6px 0 0 8px;
   }
-  #frame .content .messages ul li.replies p {
+  #frame .content .messages ul li.sent p {
     background: #f5f5f5;
     float: right;
   }
@@ -687,17 +690,22 @@
   }
   #frame .content .message-input {
     position: absolute;
-    bottom: 0;
+    bottom: -6px;
     width: 100%;
     z-index: 99;
+    background-color: white;
+
   }
   #frame .content .message-input .wrap {
     position: relative;
+    background-color: white;
   }
   #frame .content .message-input .wrap input {
     font-family: 'proxima-nova', 'Source Sans Pro', sans-serif;
     float: left;
     border: none;
+    position: absolute;
+    left: 35px;
     width: calc(100% - 90px);
     padding: 11px 32px 10px 8px;
     font-size: 0.8em;
@@ -730,7 +738,7 @@
   #frame .content .message-input .wrap .attachment:hover {
     opacity: 1;
   }
-  #frame .content .message-input .wrap button {
+  #frame .submit{
     float: right;
     border: none;
     width: 50px;

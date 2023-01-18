@@ -16,67 +16,71 @@ function SignupAndLogin() {
 
   const doSignup = async () => {
     const response = await instance.post('/signup', signUpData);
-    response ? navigate('/') : toast.error('Sorry,Error While Sign Up');
+    if (response.data.isAuth) {
+      localStorage.setItem('id', response.data.id);
+      navigate('/');
+    } else toast.error('Sorry,Error While Sign Up');
   };
 
   const doLogin = async () => {
     const response = await instance.post('/login', loginData);
-    console.log(response);
-    response.data.status
-      ? navigate('/')
-      : toast.error('Incorrect Email Or Password');
+
+    if (response.data.status) {
+      localStorage.setItem('id',response.data.id);
+      navigate('/');
+    } else toast.error('Incorrect Email Or Password');
   };
 
   return (
-    <div className='outer'>
-      <video autoPlay muted loop id='myVideo'>
-        <source src={background} type='video/mp4' />
+    <div className="outer">
+      <video autoPlay muted loop id="myVideo">
+        <source src={background} type="video/mp4" />
       </video>
 
       <div
         className={`parent ${toggle && 'right-panel-active'}`}
-        id='container'
+        id="container"
       >
-        <div className='form-container sign-up-container'>
-          <form action='#' className='sign-form'>
-            <h1 className='sign-h1'>Create Account</h1>
-            <div className='social-container'>
-              <a href='/#' className='social sign-a'>
-                <i className='fab fa-google-plus-g' />
+        <div className="form-container sign-up-container">
+          <form action="#" className="sign-form">
+            <h1 className="sign-h1">Create Account</h1>
+            <div className="social-container">
+              <a href="/#" className="social sign-a">
+                <i className="fab fa-google-plus-g" />
               </a>
             </div>
-            <span className='sign-span'>
+            <span className="sign-span">
               {/* or use your email for registration */}
             </span>
             <input
-              className='sign-input'
-              type='text'
-              placeholder='User Name'
+              className="sign-input"
+              type="text"
+              placeholder="User Name"
               onChange={(e) => {
                 setSignUpData({ ...signUpData, username: e.target.value });
               }}
             />
             <input
-              className='sign-input'
-              type='email'
-              placeholder='Email'
+              className="sign-input"
+              type="email"
+              placeholder="Email"
               onChange={(e) => {
                 setSignUpData({ ...signUpData, email: e.target.value });
               }}
             />
             <input
-              className='sign-input'
-              type='password'
-              placeholder='Password'
+              className="sign-input"
+              type="password"
+              placeholder="Password"
               onChange={(e) => {
                 setSignUpData({ ...signUpData, password: e.target.value });
               }}
             />
 
             <input
-              className='sign-input'
-              type='password'
-              placeholder='Confirm Password'
+              className="sign-input"
+              type="password"
+              placeholder="Confirm Password"
               onChange={(e) => {
                 setSignUpData({
                   ...signUpData,
@@ -84,69 +88,69 @@ function SignupAndLogin() {
                 });
               }}
             />
-            <button className='sign-button' type='button' onClick={doSignup}>
+            <button className="sign-button" type="button" onClick={doSignup}>
               Sign Up
             </button>
           </form>
         </div>
-        <div className='form-container sign-in-container'>
-          <form action='/#' className='sign-form'>
-            <h1 className='sign-h1'>Sign in</h1>
-            <div className='social-container'>
-              <a href='/#' className='social sign-a'>
-                <i className='fab fa-google-plus-g' />
+        <div className="form-container sign-in-container">
+          <form action="/#" className="sign-form">
+            <h1 className="sign-h1">Sign in</h1>
+            <div className="social-container">
+              <a href="/#" className="social sign-a">
+                <i className="fab fa-google-plus-g" />
               </a>
             </div>
             {/* <span className="sign-span">or use your account</span> */}
             <input
-              className='sign-input'
-              type='email'
-              placeholder='Email'
+              className="sign-input"
+              type="email"
+              placeholder="Email"
               onChange={(e) => {
                 setLoginData({ ...loginData, email: e.target.value });
               }}
             />
             <input
-              className='sign-input'
-              type='password'
-              placeholder='Password'
+              className="sign-input"
+              type="password"
+              placeholder="Password"
               onChange={(e) => {
                 setLoginData({ ...loginData, password: e.target.value });
               }}
             />
-            <a className='sign-a' href='/#'>
+            <a className="sign-a" href="/#">
               Forgot your password?
             </a>
-            <button className='sign-button' type='button' onClick={doLogin}>
+            <button className="sign-button" type="button" onClick={doLogin}>
               Sign In
             </button>
           </form>
         </div>
-        <div className='overlay-container'>
-          <div className='overlay'>
-            <div className='overlay-panel overlay-left'>
-              <h1 className='sign-h1'>Welcome Back!</h1>
-              <p className='sign-p'>
+        <div className="overlay-container">
+          <div className="overlay">
+            <div className="overlay-panel overlay-left">
+              <h1 className="sign-h1">Welcome Back!</h1>
+              <p className="sign-p">
                 To keep connected with us please login with your personal info
               </p>
               <button
-                className='ghost sign-button'
-                id='signIn'
-                type='button'
+                className="ghost sign-button"
+                id="signIn"
+                type="button"
                 onClick={() => setToggle(false)}
               >
                 Sign In
               </button>
             </div>
-            <div className='overlay-panel overlay-right'>
-              <h1 className='sign-h1'>Hello, Friend!</h1>
-              <p className='sign-p'>
+            <div className="overlay-panel overlay-right">
+              <h1 className="sign-h1">Hello, Friend!</h1>
+              <p className="sign-p">
                 Enter your personal details and start journey with us
               </p>
               <button
-                className='ghost sign-button'
-                id='signUp'
-                type='button'
+                className="ghost sign-button"
+                id="signUp"
+                type="button"
                 onClick={() => setToggle(true)}
               >
                 Sign Up
@@ -155,8 +159,7 @@ function SignupAndLogin() {
           </div>
         </div>
       </div>
-      <ToastContainer position='top-center' />
-
+      <ToastContainer position="top-center" />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import instance from '../../api/axios';
 import './Navbar.css';
@@ -14,8 +14,11 @@ import {
 } from '@mui/material';
 import image from '../../assets/dummyData/images/profile-1.jpg';
 import FollowButton from '../FollowButton/FollowButton';
+import { UserContext } from '../../store/userContext';
 
 function Navbar() {
+  const user = useContext(UserContext);
+
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
   const [search, setSearch] = useState(false);
@@ -68,7 +71,10 @@ function Navbar() {
                   aria-haspopup="true"
                   aria-expanded={open ? 'true' : undefined}
                 >
-                  <Avatar sx={{ width: 38, height: 38 }} src={image} />
+                  <Avatar
+                    sx={{ width: 38, height: 38 }}
+                    src={user.profileImg}
+                  />
                 </IconButton>
               </Tooltip>
               <Menu
@@ -108,28 +114,19 @@ function Navbar() {
               >
                 <Link to="/profile" className="link">
                   <MenuItem>
-                    <Avatar src={image} />
+                    <Avatar src={user.profileImg} />
                     Profile
                   </MenuItem>
                 </Link>
-                <MenuItem>
-                  <Avatar />
-                  My account
-                </MenuItem>
+
                 <Divider />
-                <MenuItem>
-                  <ListItemIcon>
-                    <PersonAdd fontSize="small" />
-                  </ListItemIcon>
-                  Add another account
-                </MenuItem>
-                <MenuItem>
-                  <ListItemIcon>
-                    <Settings fontSize="small" />
-                  </ListItemIcon>
-                  Settings
-                </MenuItem>
-                <MenuItem>
+
+                <MenuItem
+                  onClick={() => {
+                    document.cookie = 'Accesstoken=null';
+                    window.location = '/signup';
+                  }}
+                >
                   <ListItemIcon>
                     <Logout fontSize="small" />
                   </ListItemIcon>

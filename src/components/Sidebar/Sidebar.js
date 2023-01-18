@@ -1,22 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './Sidebar.css';
 import image from '../../assets/dummyData/images/profile-7.jpg';
 import { useNavigate } from 'react-router-dom';
+import Chat from '../Chat/Chat';
+import { UserContext } from '../../store/userContext';
 
 function Sidebar({ elements, create, profile }) {
+  const user = useContext(UserContext);
+
   const navigate = useNavigate();
   const [active, setActive] = useState();
+  const [openChat, setOpenChat] = useState(false);
+
   return (
     <div>
       <div className="left">
         {profile ? (
           <a href="/#" className="profile">
             <div className="profile-pic">
-              <img src={image} alt="" />
+              <img
+                src={
+                  user.profileImg
+                    ? user.profileImg
+                    : 'https://www.pngall.com/wp-content/uploads/5/Profile-PNG-File.png'
+                }
+                alt=""
+              />
             </div>
             <div className="handle">
-              <h4>Muhammed Rashin</h4>
-              <p className="text-muted">@rash</p>
+              <h4>
+                {user.firstName} {user.lastName}
+              </h4>
+              <p className="text-muted">@{user.username}</p>
             </div>
           </a>
         ) : null}
@@ -27,8 +42,11 @@ function Sidebar({ elements, create, profile }) {
               className={`menu-item ${active === element && 'active'}`}
               key={element.text}
               onClick={() => {
-                navigate(element.path)
+                navigate(element.path);
                 setActive(element);
+                element.text === 'Messages'
+                  ? setOpenChat(true)
+                  : setOpenChat(false);
               }}
             >
               <span>
@@ -53,6 +71,7 @@ function Sidebar({ elements, create, profile }) {
           </label>
         ) : null}
       </div>
+      <Chat openChat={openChat} setOpenChat={setOpenChat} />
     </div>
   );
 }

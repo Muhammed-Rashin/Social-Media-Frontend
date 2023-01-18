@@ -108,7 +108,7 @@ function ProfilePage() {
                         accept="image/*"
                       />
                     )}
-                    <img src={profileData.profileImg} alt="" />
+                    <img src={profileData.profileImg ? profileData.profileImg  : 'https://toppng.com/uploads/preview/instagram-default-profile-picture-11562973083brycehrmyv.png'} alt="" />
                     {id ? null : (
                       <ul className="social">
                         <li>

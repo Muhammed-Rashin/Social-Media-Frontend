@@ -7,10 +7,21 @@ import SignupProtecter from './components/ProtectedRouts/SignupProtecter';
 import Home from './pages/Home/Home';
 import SignupAndLogin from './pages/SignupAndLogin/SignupAndLogin';
 import Profile from './pages/Profile/ProfilePage';
+import { UserContext } from './store/userContext';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import instance from './api/axios';
 
 function App() {
+  const [user, setUser] = useState({});
+  useEffect(()=>{
+    instance.get('/getUser').then(({data})=>{
+      setUser(data)
+    })
+  })
   return (
     <BrowserRouter>
+      <UserContext.Provider value={user}>
       <Routes>
         <Route
           path="/"
@@ -37,6 +48,7 @@ function App() {
           }
         />
       </Routes>
+      </UserContext.Provider>
     </BrowserRouter>
   );
 }
