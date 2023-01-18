@@ -121,7 +121,7 @@ function Navbar() {
 
                 <MenuItem
                   onClick={() => {
-                    document.cookie = 'Accesstoken=null';
+                    localStorage.removeItem('Accesstoken');
                     window.location = '/signup';
                   }}
                 >

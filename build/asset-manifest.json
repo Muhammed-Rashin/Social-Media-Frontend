@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.debab390.css",
-    "main.js": "/static/js/main.281377ce.js",
+    "main.js": "/static/js/main.50c88db8.js",
     "static/media/Backgorund.mp4": "/static/media/Backgorund.620f4328504400f35db5.mp4",
     "static/media/profile-13.jpg": "/static/media/profile-13.9adf09adbd1bedfa02c7.jpg",
     "static/media/profile-9.jpg": "/static/media/profile-9.0d4445cebc211dec7c35.jpg",
@@ -9,10 +9,10 @@
     "static/media/profile-7.jpg": "/static/media/profile-7.59a26bc79fe10596cf60.jpg",
     "index.html": "/index.html",
     "main.debab390.css.map": "/static/css/main.debab390.css.map",
-    "main.281377ce.js.map": "/static/js/main.281377ce.js.map"
+    "main.50c88db8.js.map": "/static/js/main.50c88db8.js.map"
   },
   "entrypoints": [
     "static/css/main.debab390.css",
-    "static/js/main.281377ce.js"
+    "static/js/main.50c88db8.js"
   ]
 }
