@@ -47,17 +47,17 @@ export default function Dropdown({ setPosts, id }) {
   return (
     <div>
       <IconButton
-        aria-label='more'
-        id='long-button'
+        aria-label="more"
+        id="long-button"
         aria-controls={open ? 'long-menu' : undefined}
         aria-expanded={open ? 'true' : undefined}
-        aria-haspopup='true'
+        aria-haspopup="true"
         onClick={handleClick}
       >
         <MoreVertIcon />
       </IconButton>
       <Menu
-        id='long-menu'
+        id="long-menu"
         MenuListProps={{
           'aria-labelledby': 'long-button',
         }}

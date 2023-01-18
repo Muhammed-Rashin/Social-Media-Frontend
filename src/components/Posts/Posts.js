@@ -39,7 +39,7 @@ function Posts({ posts, setPosts }) {
             <div className="head">
               <div className="user">
                 <div className="profile-pic">
-                  <img src={element.userId.profileImg?element.userId.profileImg:'https://www.pngall.com/wp-content/uploads/5/Profile-PNG-File.png'} alt="" />
+                  <img src={element.userId.profileImg ? element.userId.profileImg : 'https://www.pngall.com/wp-content/uploads/5/Profile-PNG-File.png'} alt="" />
                 </div>
                 <div className="info">
                   <h3>{element.userId.username}</h3>
@@ -72,9 +72,9 @@ function Posts({ posts, setPosts }) {
                         ? 'fa-heart fa-solid'
                         : 'fa-heart fa-regular'
                     }`}
-                  ></i>
+                  />
                 </span>
-                <span onClick={()=>setCommentOpen(element)}>
+                <span onClick={() => setCommentOpen(element)}>
                   <i className="uil uil-comment" />
                 </span>
                 <span>
@@ -109,7 +109,11 @@ function Posts({ posts, setPosts }) {
               </span>
               ,
               <p>
-                <b>{element.likes.length} Likes</b>
+                <b>
+                  {element.likes.length}
+                  {' '}
+                  Likes
+                </b>
               </p>
             </div>
 
@@ -127,7 +131,7 @@ function Posts({ posts, setPosts }) {
         ))}
       </div>
 
-      {commentOpen ? <Comments commentOpen={commentOpen} setCommentOpen={setCommentOpen} />:null}
+      {commentOpen ? <Comments commentOpen={commentOpen} setCommentOpen={setCommentOpen} /> : null}
     </div>
   );
 }

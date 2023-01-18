@@ -21,7 +21,9 @@ const style = {
   height: 580,
 };
 
-function EditProfile({ open, setOpen, profileData, setProfileData }) {
+function EditProfile({
+  open, setOpen, profileData, setProfileData,
+}) {
   const [editData, setEditData] = useState({});
 
   const doEdit = () => {
@@ -52,9 +54,7 @@ function EditProfile({ open, setOpen, profileData, setProfileData }) {
           <div className="edit-profile-container">
             <TextField
               sx={{ marginBottom: '30px' }}
-              onChange={(e) =>
-                setEditData({ ...editData, username: e.target.value })
-              }
+              onChange={(e) => setEditData({ ...editData, username: e.target.value })}
               id="outlined-basic"
               label="Username"
               variant="outlined"
@@ -63,9 +63,7 @@ function EditProfile({ open, setOpen, profileData, setProfileData }) {
             />
             <TextField
               sx={{ marginBottom: '30px' }}
-              onChange={(e) =>
-                setEditData({ ...editData, firstName: e.target.value })
-              }
+              onChange={(e) => setEditData({ ...editData, firstName: e.target.value })}
               id="outlined-basic"
               label="First Name"
               variant="outlined"
@@ -73,18 +71,14 @@ function EditProfile({ open, setOpen, profileData, setProfileData }) {
             />
             <TextField
               sx={{ marginBottom: '30px' }}
-              onChange={(e) =>
-                setEditData({ ...editData, lastName: e.target.value })
-              }
+              onChange={(e) => setEditData({ ...editData, lastName: e.target.value })}
               id="outlined-basic"
               label="Lasr Name"
               variant="outlined"
               defaultValue={profileData.lastName}
             />
             <TextField
-              onChange={(e) =>
-                setEditData({ ...editData, bio: e.target.value })
-              }
+              onChange={(e) => setEditData({ ...editData, bio: e.target.value })}
               id="filled-multiline-static"
               label="Bio"
               multiline

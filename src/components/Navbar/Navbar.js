@@ -1,8 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import instance from '../../api/axios';
 import './Navbar.css';
-import { PersonAdd, Settings, Logout } from '@mui/icons-material';
+import { Logout } from '@mui/icons-material';
 import {
   Tooltip,
   Avatar,
@@ -12,7 +11,7 @@ import {
   MenuItem,
   Menu,
 } from '@mui/material';
-import image from '../../assets/dummyData/images/profile-1.jpg';
+import instance from '../../api/axios';
 import FollowButton from '../FollowButton/FollowButton';
 import { UserContext } from '../../store/userContext';
 
@@ -36,7 +35,6 @@ function Navbar() {
       instance
         .post('/searchUsers', { searchValue: searchKey })
         .then(({ data }) => {
-          console.log(data);
           setSearch(data);
         });
     }
@@ -142,50 +140,44 @@ function Navbar() {
         {search === 'nothing' ? (
           <h1 className="mt-5">No Result Found</h1>
         ) : search === false ? null : (
-          search.map((result) => {
-            return (
-              <div
-                key={result._id}
-                className="results"
-                onClick={() => {
-                  setSearch(false);
-                  navigate('/profile?id=' + result._id);
-                }}
-              >
-                <div className="search-details">
-                  <div className="result-profile-image">
-                    <img
-                      src={
-                        result.profileImg
-                          ? result.profileImg
-                          : 'https://www.pngall.com/wp-content/uploads/5/Profile-PNG-File.png'
-                      }
-                      alt=""
-                    />
-                  </div>
-                  <div className="result-details">
-                    <span>
-                      <b>{result.username}</b>
-                    </span>
-                    {result.firstName || result.lastName ? (
-                      <span>{result.firstName + ' ' + result.lastName}</span>
-                    ) : null}
-                  </div>
+          search.map((result) => (
+            <div
+              key={result._id}
+              className="results"
+              onClick={() => {
+                setSearch(false);
+                navigate(`/profile?id=${result._id}`);
+              }}
+            >
+              <div className="search-details">
+                <div className="result-profile-image">
+                  <img
+                    src={
+                      result.profileImg
+                        ? result.profileImg
+                        : 'https://www.pngall.com/wp-content/uploads/5/Profile-PNG-File.png'
+                    }
+                    alt=""
+                  />
                 </div>
-                <div className="follow-button">
-                  {result.followed ? (
-                    <FollowButton id={result._id} func={doSearch} />
-                  ) : (
-                    <FollowButton
-                      type={'follow'}
-                      id={result._id}
-                      func={doSearch}
-                    />
-                  )}
+                <div className="result-details">
+                  <span>
+                    <b>{result.username}</b>
+                  </span>
+                  {result.firstName || result.lastName ? (
+                    <span>{`${result.firstName} ${result.lastName}`}</span>
+                  ) : null}
                 </div>
               </div>
-            );
-          })
+              <div className="follow-button">
+                {result.followed ? (
+                  <FollowButton id={result._id} func={doSearch} />
+                ) : (
+                  <FollowButton type="follow" id={result._id} func={doSearch} />
+                )}
+              </div>
+            </div>
+          ))
         )}
       </div>
     </div>

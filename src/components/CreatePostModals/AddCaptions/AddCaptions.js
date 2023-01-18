@@ -19,38 +19,38 @@ function AddCaptions({
       onClose={() => {
         setOpen(false);
       }}
-      aria-labelledby='modal-modal-title'
-      aria-describedby='modal-modal-description'
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
     >
-      <div className='add-caption'>
-        <header className='add-caption-header'>
+      <div className="add-caption">
+        <header className="add-caption-header">
           <h4>Add Captions</h4>
           <button
-            type='button'
-            className='bg-transparent text-blue-700 font-semibold py-2 px-4 border border-blue-500 hover:border-transparent rounded post-button'
+            type="button"
+            className="bg-transparent text-blue-700 font-semibold py-2 px-4 border border-blue-500 hover:border-transparent rounded post-button"
             onClick={createPost}
           >
             Post
           </button>
         </header>
-        <div className='show-image-div'>
+        <div className="show-image-div">
           {' '}
-          <img src={preview} alt='' />
+          <img src={preview} alt="" />
         </div>
-        <div className='add-captions-div'>
+        <div className="add-captions-div">
           <textarea
-            type='text'
-            className='caption-input'
-            placeholder='Add a caption .....'
+            type="text"
+            className="caption-input"
+            placeholder="Add a caption ....."
             onChange={(e) => {
               setCaption(e.target.value);
             }}
           />
 
           <input
-            type='text'
-            className='location-input'
-            placeholder='Add loacation'
+            type="text"
+            className="location-input"
+            placeholder="Add loacation"
             onChange={(e) => {
               setLocation(e.target.value);
             }}

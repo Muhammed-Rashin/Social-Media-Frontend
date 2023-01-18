@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import CircularProgress from '@mui/material/CircularProgress';
+import { useLocation } from 'react-router-dom';
 import instance from '../../api/axios';
 import EditProfile from '../../components/EditProfile/EditProfile';
 import Navbar from '../../components/Navbar/Navbar';
 import Sidebar from '../../components/Sidebar/Sidebar';
-import CircularProgress from '@mui/material/CircularProgress';
-import { useLocation } from 'react-router-dom';
 import './Profile.css';
 import FollowButton from '../../components/FollowButton/FollowButton';
 
@@ -108,7 +108,7 @@ function ProfilePage() {
                         accept="image/*"
                       />
                     )}
-                    <img src={profileData.profileImg ? profileData.profileImg  : 'https://toppng.com/uploads/preview/instagram-default-profile-picture-11562973083brycehrmyv.png'} alt="" />
+                    <img src={profileData.profileImg ? profileData.profileImg : 'https://toppng.com/uploads/preview/instagram-default-profile-picture-11562973083brycehrmyv.png'} alt="" />
                     {id ? null : (
                       <ul className="social">
                         <li>
@@ -128,9 +128,9 @@ function ProfilePage() {
 
                     {id ? (
                       profileData.followed ? (
-                        <FollowButton id={id} func={getUserData}/>
+                        <FollowButton id={id} func={getUserData} />
                       ) : (
-                        <FollowButton type={'follow'} id={id} func={getUserData}/>
+                        <FollowButton type="follow" id={id} func={getUserData} />
                       )
                     ) : (
                       <button
@@ -142,9 +142,17 @@ function ProfilePage() {
                     )}
                   </div>
                   <div className="user-details">
-                    <span>{postData.length} posts</span>
+                    <span>
+                      {postData.length}
+                      {' '}
+                      posts
+                    </span>
                     {profileData.followers ? (
-                      <span>{profileData.followers.length} followers</span>
+                      <span>
+                        {profileData.followers.length}
+                        {' '}
+                        followers
+                      </span>
                     ) : (
                       <span>0 followers</span>
                     )}
@@ -152,7 +160,7 @@ function ProfilePage() {
                   </div>
                   <b>
                     {profileData.firstName || profileData.lastName
-                      ? profileData.firstName + ' ' + profileData.lastName
+                      ? `${profileData.firstName} ${profileData.lastName}`
                       : null}
                   </b>
                   <p>{profileData.bio}</p>
@@ -161,25 +169,25 @@ function ProfilePage() {
             </div>
 
             <div className="gallery">
-              {postData.map((post) => {
-                return (
-                  <div className="postsImgaes" key={post._id}>
-                    <img src={post.imageUrl} alt="" />
-                    <ul className="properties">
-                      <li>
-                        <i className="fa-light fa-heart"></i>
-                        <span>&nbsp;&nbsp;{post.likes.length}</span>
-                      </li>
-                      {/* <li>
+              {postData.map((post) => (
+                <div className="postsImgaes" key={post._id}>
+                  <img src={post.imageUrl} alt="" />
+                  <ul className="properties">
+                    <li>
+                      <i className="fa-light fa-heart" />
+                      <span>
+                        {post.likes.length}
+                      </span>
+                    </li>
+                    {/* <li>
                         <i className="fa-light fa-comment" />
                         <span>&nbsp;&nbsp;56</span>
                       </li> */}
-                    </ul>
+                  </ul>
 
-                    <span className="caption">{post.caption}</span>
-                  </div>
-                );
-              })}
+                  <span className="caption">{post.caption}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>

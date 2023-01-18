@@ -1,12 +1,15 @@
 import * as React from 'react';
-import { useEffect, useRef, useState, useContext } from 'react';
+import {
+  useEffect, useRef, useState, useContext,
+} from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { io } from 'socket.io-client';
 import './Chat.css';
-import instance from '../../api/axios';
 import EmojiPicker from 'emoji-picker-react';
+import instance from '../../api/axios';
 import { UserContext } from '../../store/userContext';
+
 function Chat({ openChat, setOpenChat }) {
   const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState({});
@@ -19,9 +22,9 @@ function Chat({ openChat, setOpenChat }) {
 
   const user = useContext(UserContext);
 
-  let userId = localStorage.getItem('id');
+  const userId = localStorage.getItem('id');
 
-  const onEmojiClick = (e, emojiObject) => {
+  const onEmojiClick = (e) => {
     setMessageText(messageText + e.emoji);
     setEmojiVisiblity(false);
   };
@@ -64,11 +67,11 @@ function Chat({ openChat, setOpenChat }) {
 
   const handleClose = () => setOpenChat(false);
 
-  const handleSend = async (e) => {
+  const handleSend = async () => {
     if (messageText !== '') {
       setMessages([...messages, { message: messageText, send: true }]);
 
-      //Sending to Socket
+      // Sending to Socket
       socket.current.emit('send-message', {
         message: messageText,
         to: currentUser._id,
@@ -122,48 +125,46 @@ function Chat({ openChat, setOpenChat }) {
                   <i
                     className="fa fa-chevron-down expand-button"
                     aria-hidden="true"
-                  ></i>
+                  />
                 </div>
               </div>
               <div id="search">
-                <label for="">
-                  <i className="fa fa-search" aria-hidden="true"></i>
+                <label htmlFor="">
+                  <i className="fa fa-search" aria-hidden="true" />
                 </label>
                 <input type="text" placeholder="Search contacts..." />
               </div>
               <div id="contacts">
                 <ul>
-                  {users.map((user) => {
-                    return (
-                      <li
-                        onClick={() => setCurrentUser(user)}
-                        className={`contact ${
-                          user === currentUser && 'active'
-                        }`}
-                        key={user._id}
-                      >
-                        <div className="wrap">
-                          {onlineUsers.find(
-                            (element) => element.userId === user._id,
-                          ) ? (
-                            <span className="contact-status online"></span>
+                  {users.map((user) => (
+                    <li
+                      onClick={() => setCurrentUser(user)}
+                      className={`contact ${
+                        user === currentUser && 'active'
+                      }`}
+                      key={user._id}
+                    >
+                      <div className="wrap">
+                        {onlineUsers.find(
+                          (element) => element.userId === user._id,
+                        ) ? (
+                          <span className="contact-status online" />
                           ) : null}
-                          <img
-                            src={
+                        <img
+                          src={
                               user.profileImg
                                 ? user.profileImg
                                 : 'https://www.pngall.com/wp-content/uploads/5/Profile-PNG-File.png'
                             }
-                            alt=""
-                          />
-                          <div className="meta">
-                            <p className="name">{user.username}</p>
-                            <p className="preview">{user.bio}</p>
-                          </div>
+                          alt=""
+                        />
+                        <div className="meta">
+                          <p className="name">{user.username}</p>
+                          <p className="preview">{user.bio}</p>
                         </div>
-                      </li>
-                    );
-                  })}
+                      </div>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -181,36 +182,34 @@ function Chat({ openChat, setOpenChat }) {
               </div>
               <div className="messages">
                 <ul>
-                  {messages.map((message, index) => {
-                    return (
-                      <li
-                        ref={scroll}
-                        className={message.send ? 'sent' : 'replies'}
-                        key={index}
-                      >
-                        {message.send ? (
-                          <img
-                            src={
+                  {messages.map((message,index) => (
+                    <li
+                      ref={scroll}
+                      className={message.send ? 'sent' : 'replies'}
+                      key={message.message + index}
+                    >
+                      {message.send ? (
+                        <img
+                          src={
                               user.profileImg
                                 ? user.profileImg
                                 : 'https://toppng.com/uploads/preview/instagram-default-profile-picture-11562973083brycehrmyv.png'
                             }
-                            alt=""
-                          />
-                        ) : (
-                          <img
-                            src={
+                          alt=""
+                        />
+                      ) : (
+                        <img
+                          src={
                               currentUser.profileImg
                                 ? currentUser.profileImg
                                 : 'https://toppng.com/uploads/preview/instagram-default-profile-picture-11562973083brycehrmyv.png'
                             }
-                            alt=""
-                          />
-                        )}
-                        <p>{message.message}</p>
-                      </li>
-                    );
-                  })}
+                          alt=""
+                        />
+                      )}
+                      <p>{message.message}</p>
+                    </li>
+                  ))}
 
                   <li>
                     <p> </p>
@@ -233,9 +232,9 @@ function Chat({ openChat, setOpenChat }) {
                   <i
                     onClick={() => setEmojiVisiblity(!emojiVisiblity)}
                     className="fa-solid fa-face-smile emoji-icon"
-                  ></i>
+                  />
                   <button onClick={handleSend} className="submit">
-                    <i className="fa fa-paper-plane" aria-hidden="true"></i>
+                    <i className="fa fa-paper-plane" aria-hidden="true" />
                   </button>
                 </div>
               </div>

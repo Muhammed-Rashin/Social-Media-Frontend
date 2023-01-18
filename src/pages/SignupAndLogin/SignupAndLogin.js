@@ -26,7 +26,7 @@ function SignupAndLogin() {
     const response = await instance.post('/login', loginData);
 
     if (response.data.status) {
-      localStorage.setItem('id',response.data.id);
+      localStorage.setItem('id', response.data.id);
       navigate('/');
     } else toast.error('Incorrect Email Or Password');
   };

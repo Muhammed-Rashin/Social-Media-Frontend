@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import './Sidebar.css';
-import image from '../../assets/dummyData/images/profile-7.jpg';
 import { useNavigate } from 'react-router-dom';
+import image from '../../assets/dummyData/images/profile-7.jpg';
 import Chat from '../Chat/Chat';
 import { UserContext } from '../../store/userContext';
 
@@ -29,9 +29,14 @@ function Sidebar({ elements, create, profile }) {
             </div>
             <div className="handle">
               <h4>
-                {user.firstName} {user.lastName}
+                {user.firstName}
+                {' '}
+                {user.lastName}
               </h4>
-              <p className="text-muted">@{user.username}</p>
+              <p className="text-muted">
+                @
+                {user.username}
+              </p>
             </div>
           </a>
         ) : null}
