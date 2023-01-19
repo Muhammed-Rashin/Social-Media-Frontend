@@ -19,22 +19,27 @@ const style = {
   p: 4,
 };
 
-function Followers({ followOpen, setFollowOpen }) {
+function Followers({ followOpen, setFollowOpen, id }) {
   const handleClose = () => setFollowOpen(false);
-  const [result, setResult] = useState([]);
+  const [data, setData] = useState([]);
 
-  useEffect(() => {
+  function func() {
     if (followOpen === 'followers') {
-      instance.get('/getFollowers').then(({ data }) => {
-        console.log(data);
-        setResult(data);
+      instance.post('/getFollowers', { id }).then(({ data }) => {
+        if (data) {
+          setData(data);
+        } else setData([]);
       });
     } else if (followOpen === 'following') {
-      instance.get('/getFollowing').then(({ data }) => {
-        setResult(data);
+      instance.post('/getFollowing').then(({ data }) => {
+        setData(data);
       });
     }
-  }, [followOpen]);
+  }
+
+  useEffect(() => {
+    func();
+  }, [followOpen, id]);
 
   return (
     <div>
@@ -47,42 +52,47 @@ function Followers({ followOpen, setFollowOpen }) {
       >
         <Box sx={style}>
           <div className="followers-main-div">
-            <div
-              key={result._id}
-              className="results"
-              onClick={() => {
-                // setSearch(false);
-                // navigate(`/profile?id=${result._id}`);
-              }}
-            >
-              <div className="search-details">
-                <div className="result-profile-image">
-                  <img
-                    src={
-                      result.profileImg
-                        ? result.profileImg
-                        : 'https://www.pngall.com/wp-content/uploads/5/Profile-PNG-File.png'
-                    }
-                    alt=""
-                  />
+            <h1>Followers</h1>
+            {data.map((result) => {
+              return (
+                <div
+                  key={result._id}
+                  className="results"
+                  onClick={() => {
+                    // setSearch(false);
+                    // navigate(`/profile?id=${result._id}`);
+                  }}
+                >
+                  <div className="search-details">
+                    <div className="result-profile-image">
+                      <img
+                        src={
+                          result.profileImg
+                            ? result.profileImg
+                            : 'https://www.pngall.com/wp-content/uploads/5/Profile-PNG-File.png'
+                        }
+                        alt=""
+                      />
+                    </div>
+                    <div className="result-details">
+                      <span>
+                        <b>{result.username}</b>
+                      </span>
+                      {result.firstName || result.lastName ? (
+                        <span>{`${result.firstName} ${result.lastName}`}</span>
+                      ) : null}
+                    </div>
+                  </div>
+                  <div className="follow-button">
+                    {result.followed ? (
+                      <FollowButton id={result._id} func={func} />
+                    ) : (
+                      <FollowButton type="follow" id={result._id} func={func} />
+                    )}
+                  </div>
                 </div>
-                <div className="result-details">
-                  <span>
-                    <b>{result.username}</b>
-                  </span>
-                  {result.firstName || result.lastName ? (
-                    <span>{`${result.firstName} ${result.lastName}`}</span>
-                  ) : null}
-                </div>
-              </div>
-              <div className="follow-button">
-                {result.followed ? (
-                  <FollowButton id={result._id} />
-                ) : (
-                  <FollowButton type="follow" id={result._id} />
-                )}
-              </div>
-            </div>
+              );
+            })}
           </div>
         </Box>
       </Modal>

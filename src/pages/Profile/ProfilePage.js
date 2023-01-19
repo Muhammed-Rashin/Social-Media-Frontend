@@ -157,7 +157,7 @@ function ProfilePage() {
                   <div className="user-details">
                     <span>{postData.length} posts</span>
                     {profileData.followers ? (
-                      <span onClick={()=>setFollowOpen('followers')}>
+                      <span onClick={() => setFollowOpen('followers')}>
                         {profileData.followers.length} followers
                       </span>
                     ) : (
@@ -206,7 +206,11 @@ function ProfilePage() {
         setProfileData={setProfileData}
       />
 
-      <Followers followOpen={followOpen} setFollowOpen={setFollowOpen}/>
+      <Followers
+        followOpen={followOpen}
+        setFollowOpen={setFollowOpen}
+        id={id}
+      />
     </div>
   );
 }

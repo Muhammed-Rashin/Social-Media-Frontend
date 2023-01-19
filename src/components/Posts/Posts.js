@@ -59,7 +59,7 @@ function Posts({ posts, setPosts }) {
               </div>
             </div>
 
-            <div className="photo">
+            <div className="photo"> 
               <img src={element.imageUrl} alt="" />
             </div>
 
