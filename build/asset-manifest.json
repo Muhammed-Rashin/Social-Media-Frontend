@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/static/css/main.debab390.css",
-    "main.js": "/static/js/main.0de89321.js",
+    "main.css": "/static/css/main.b5a190d7.css",
+    "main.js": "/static/js/main.4f325f3f.js",
     "static/media/Backgorund.mp4": "/static/media/Backgorund.620f4328504400f35db5.mp4",
     "static/media/profile-13.jpg": "/static/media/profile-13.9adf09adbd1bedfa02c7.jpg",
     "static/media/profile-9.jpg": "/static/media/profile-9.0d4445cebc211dec7c35.jpg",
     "static/media/profile-14.jpg": "/static/media/profile-14.155726aa8b3a14b97821.jpg",
     "static/media/profile-7.jpg": "/static/media/profile-7.59a26bc79fe10596cf60.jpg",
     "index.html": "/index.html",
-    "main.debab390.css.map": "/static/css/main.debab390.css.map",
-    "main.0de89321.js.map": "/static/js/main.0de89321.js.map"
+    "main.b5a190d7.css.map": "/static/css/main.b5a190d7.css.map",
+    "main.4f325f3f.js.map": "/static/js/main.4f325f3f.js.map"
   },
   "entrypoints": [
-    "static/css/main.debab390.css",
-    "static/js/main.0de89321.js"
+    "static/css/main.b5a190d7.css",
+    "static/js/main.4f325f3f.js"
   ]
 }

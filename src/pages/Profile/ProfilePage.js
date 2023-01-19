@@ -7,6 +7,7 @@ import Navbar from '../../components/Navbar/Navbar';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import './Profile.css';
 import FollowButton from '../../components/FollowButton/FollowButton';
+import Followers from '../../components/FollowersAndFollowing/Followers';
 
 function ProfilePage() {
   const location = useLocation();
@@ -17,6 +18,7 @@ function ProfilePage() {
   const [profileData, setProfileData] = useState({});
   const [postData, setPostData] = useState([]);
   const [profileLoading, setProfileLoading] = useState(false);
+  const [followOpen, setFollowOpen] = useState(false);
 
   const getUserData = () => {
     instance.post('/getUserProfile', { id }).then(({ data }) => {
@@ -108,7 +110,14 @@ function ProfilePage() {
                         accept="image/*"
                       />
                     )}
-                    <img src={profileData.profileImg ? profileData.profileImg : 'https://toppng.com/uploads/preview/instagram-default-profile-picture-11562973083brycehrmyv.png'} alt="" />
+                    <img
+                      src={
+                        profileData.profileImg
+                          ? profileData.profileImg
+                          : 'https://toppng.com/uploads/preview/instagram-default-profile-picture-11562973083brycehrmyv.png'
+                      }
+                      alt=""
+                    />
                     {id ? null : (
                       <ul className="social">
                         <li>
@@ -130,7 +139,11 @@ function ProfilePage() {
                       profileData.followed ? (
                         <FollowButton id={id} func={getUserData} />
                       ) : (
-                        <FollowButton type="follow" id={id} func={getUserData} />
+                        <FollowButton
+                          type="follow"
+                          id={id}
+                          func={getUserData}
+                        />
                       )
                     ) : (
                       <button
@@ -142,21 +155,17 @@ function ProfilePage() {
                     )}
                   </div>
                   <div className="user-details">
-                    <span>
-                      {postData.length}
-                      {' '}
-                      posts
-                    </span>
+                    <span>{postData.length} posts</span>
                     {profileData.followers ? (
-                      <span>
-                        {profileData.followers.length}
-                        {' '}
-                        followers
+                      <span onClick={()=>setFollowOpen('followers')}>
+                        {profileData.followers.length} followers
                       </span>
                     ) : (
                       <span>0 followers</span>
                     )}
-                    <span>13 following</span>
+                    <span onClick={() => setFollowOpen('following')}>
+                      13 following
+                    </span>
                   </div>
                   <b>
                     {profileData.firstName || profileData.lastName
@@ -175,9 +184,7 @@ function ProfilePage() {
                   <ul className="properties">
                     <li>
                       <i className="fa-light fa-heart" />
-                      <span>
-                        {post.likes.length}
-                      </span>
+                      <span>{post.likes.length}</span>
                     </li>
                     {/* <li>
                         <i className="fa-light fa-comment" />
@@ -198,6 +205,8 @@ function ProfilePage() {
         profileData={profileData}
         setProfileData={setProfileData}
       />
+
+      <Followers followOpen={followOpen} setFollowOpen={setFollowOpen}/>
     </div>
   );
 }
