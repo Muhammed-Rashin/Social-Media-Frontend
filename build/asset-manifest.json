@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/Socialpro/static/css/main.3489555f.css",
+    "main.js": "/Socialpro/static/js/main.85c42e31.js",
+    "static/media/Backgorund.mp4": "/Socialpro/static/media/Backgorund.620f4328504400f35db5.mp4",
+    "static/media/profile-13.jpg": "/Socialpro/static/media/profile-13.9adf09adbd1bedfa02c7.jpg",
+    "static/media/profile-9.jpg": "/Socialpro/static/media/profile-9.0d4445cebc211dec7c35.jpg",
+    "index.html": "/Socialpro/index.html",
+    "main.3489555f.css.map": "/Socialpro/static/css/main.3489555f.css.map",
+    "main.85c42e31.js.map": "/Socialpro/static/js/main.85c42e31.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3489555f.css",
+    "static/js/main.85c42e31.js"
+  ]
+}
