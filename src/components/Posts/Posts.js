@@ -2,9 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import './posts.css';
 
-import profile from '../../assets/dummyData/images/profile-14.jpg';
 import instance from '../../api/axios';
-import Dropdown from '../Dropdown/Dropdown';
 import Comments from '../Comments/Comments';
 
 function Posts({ posts, setPosts }) {
@@ -39,7 +37,14 @@ function Posts({ posts, setPosts }) {
             <div className="head">
               <div className="user">
                 <div className="profile-pic">
-                  <img src={element.userId.profileImg ? element.userId.profileImg : 'https://www.pngall.com/wp-content/uploads/5/Profile-PNG-File.png'} alt="" />
+                  <img
+                    src={
+                      element.userId.profileImg
+                        ? element.userId.profileImg
+                        : 'https://www.pngall.com/wp-content/uploads/5/Profile-PNG-File.png'
+                    }
+                    alt=""
+                  />
                 </div>
                 <div className="info">
                   <h3>{element.userId.username}</h3>
@@ -50,22 +55,25 @@ function Posts({ posts, setPosts }) {
                 </div>
               </div>
 
-              <div className="">
-                <Dropdown
-                  className="post-more-dropdown"
-                  setPosts={setPosts}
-                  id={element._id}
-                />
-              </div>
+              {/* <div className="">
+            
+              </div> */}
             </div>
 
-            <div className="photo"> 
+            <div className="photo">
               <img src={element.imageUrl} alt="" />
             </div>
 
             <div className="action-button">
               <div className="interaction-button">
-                <span onClick={() => doLike(element._id, element.liked)}>
+                <span
+                  onClick={() => {
+                    doLike(element._id, element.liked);
+                    element.liked
+                      ? (element.liked = false)
+                      : (element.liked = true);
+                  }}
+                >
                   <i
                     className={`like-icon ${
                       element.liked
@@ -109,11 +117,7 @@ function Posts({ posts, setPosts }) {
               </span>
               ,
               <p>
-                <b>
-                  {element.likes.length}
-                  {' '}
-                  Likes
-                </b>
+                <b>{element.likes.length} Likes</b>
               </p>
             </div>
 
@@ -124,14 +128,14 @@ function Posts({ posts, setPosts }) {
                 <span className="hash-tag">#lifestyle</span>
               </p>
             </div>
-            <div className="comments text-muted">
-              View all 130 comments
-            </div>
+            <div className="comments text-muted">View all 130 comments</div>
           </div>
         ))}
       </div>
 
-      {commentOpen ? <Comments commentOpen={commentOpen} setCommentOpen={setCommentOpen} /> : null}
+      {commentOpen ? (
+        <Comments commentOpen={commentOpen} setCommentOpen={setCommentOpen} />
+      ) : null}
     </div>
   );
 }

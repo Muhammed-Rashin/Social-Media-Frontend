@@ -8,6 +8,7 @@ import Sidebar from '../../components/Sidebar/Sidebar';
 import './Profile.css';
 import FollowButton from '../../components/FollowButton/FollowButton';
 import Followers from '../../components/FollowersAndFollowing/Followers';
+import Dropdown from '../../components/Dropdown/Dropdown';
 
 function ProfilePage() {
   const location = useLocation();
@@ -19,10 +20,14 @@ function ProfilePage() {
   const [postData, setPostData] = useState([]);
   const [profileLoading, setProfileLoading] = useState(false);
   const [followOpen, setFollowOpen] = useState(false);
+  const [openChat, setOpenChat] = useState(false);
+  const [messageProfiles, setMessageProfiles] = useState([]);
+  const [onlineUsers, setOnlineUsers] = useState([]);
+  const [currentUser, setCurrentUser] = useState({});
 
   const getUserData = () => {
     instance.post('/getUserProfile', { id }).then(({ data }) => {
-      console.log(data.user);
+      console.log('data = ',data.user);
       setProfileData(data.user);
       setPostData(data.posts);
     });
@@ -71,7 +76,7 @@ function ProfilePage() {
       count: 9,
     },
     {
-      text: 'Massages',
+      text: 'Messages',
       icon: 'uil uil-envelope-alt',
     },
     {
@@ -92,7 +97,19 @@ function ProfilePage() {
       <Navbar />
       <main>
         <div className="profile-container">
-          <Sidebar elements={elements} create profile />
+          <Sidebar
+            elements={elements}
+            messageProfiles={messageProfiles}
+            setMessageProfiles={setMessageProfiles}
+            onlineUsers={onlineUsers}
+            setOnlineUsers={setOnlineUsers}
+            setCurrentUser={setCurrentUser}
+            currentUser={currentUser}
+            setOpenChat={setOpenChat}
+            openChat={openChat}
+            create
+            profile
+          />
           <div>
             <div className="profile-container">
               <div className="banner-image">
@@ -137,7 +154,7 @@ function ProfilePage() {
 
                     {id ? (
                       profileData.followed ? (
-                        <FollowButton id={id} func={getUserData} />
+                        <FollowButton  id={id} func={getUserData} />
                       ) : (
                         <FollowButton
                           type="follow"
@@ -180,6 +197,11 @@ function ProfilePage() {
             <div className="gallery">
               {postData.map((post) => (
                 <div className="postsImgaes" key={post._id}>
+                  <div className="post-more-dropdown">
+                    {id ? null : (
+                      <Dropdown setPostData={setPostData} id={post._id} />
+                    )}
+                  </div>
                   <img src={post.imageUrl} alt="" />
                   <ul className="properties">
                     <li>

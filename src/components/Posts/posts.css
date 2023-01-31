@@ -6,6 +6,9 @@
   font-size: 0.85rem;
   line-height: 1.5;
 }
+/* .feeds{
+  width: 100vw !important;
+} */
 
 .middle .feed .head {
   display: flex;

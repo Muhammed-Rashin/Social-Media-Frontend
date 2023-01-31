@@ -3,7 +3,12 @@ import './Massages.css';
 
 import profile from '../../assets/dummyData/images/profile-9.jpg';
 
-function Massages() {
+function Massages({
+  messageProfiles,
+  onlineUsers,
+  setCurrentUser,
+  setOpenChat,
+}) {
   return (
     <div className="messages">
       <div className="heading">
@@ -24,65 +29,42 @@ function Massages() {
         />
       </div>
 
-      <div className="category">
+      {/* <div className="category">
         <h6 className="active">Primary</h6>
         <h6>General</h6>
         <h6 className="message-requests">Requests(7)</h6>
-      </div>
-      <div className="message">
-        <div className="profile-pic">
-          <img src={profile} alt="" />
-          <div className="active" />
-        </div>
-        <div className="message-body">
-          <h5>Kareena Joshua</h5>
-          <p className="text-muted">Just woke up bruh..</p>
-        </div>
-      </div>
+      </div> */}
+      {messageProfiles.map((profile) => {
+        return (
+          <div
+            onClick={() => {
+              setCurrentUser(profile);
+              setOpenChat(true);
+            }}
+            className="message"
+            key={profile._id}
+          >
+            <div className="profile-pic">
+              <img
+                src={
+                  profile.profileImg
+                    ? profile.profileImg
+                    : 'https://www.pngall.com/wp-content/uploads/5/Profile-PNG-File.png'
+                }
+                alt=""
+              />
 
-      <div className="message">
-        <div className="profile-pic">
-          <img src={profile} alt="" />
-          <div className="active" />
-        </div>
-        <div className="message-body">
-          <h5>Kareena Joshua</h5>
-          <p className="text-muted">Just woke up bruh..</p>
-        </div>
-      </div>
-
-      <div className="message">
-        <div className="profile-pic">
-          <img src={profile} alt="" />
-          <div className="active" />
-        </div>
-        <div className="message-body">
-          <h5>Kareena Joshua</h5>
-          <p className="text-muted">Just woke up bruh..</p>
-        </div>
-      </div>
-
-      <div className="message">
-        <div className="profile-pic">
-          <img src={profile} alt="" />
-          <div className="active" />
-        </div>
-        <div className="message-body">
-          <h5>Kareena Joshua</h5>
-          <p className="text-muted">Just woke up bruh..</p>
-        </div>
-      </div>
-
-      <div className="message">
-        <div className="profile-pic">
-          <img src={profile} alt="" />
-          <div className="active" />
-        </div>
-        <div className="message-body">
-          <h5>Kareena Joshua</h5>
-          <p className="text-muted">Just woke up bruh..</p>
-        </div>
-      </div>
+              {onlineUsers.find((element) => element.userId === profile._id) ? (
+                <div className="active" />
+              ) : null}
+            </div>
+            <div className="message-body">
+              <h5>{profile.username}</h5>
+              <p className="text-muted">Just woke up bruh..</p>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 }

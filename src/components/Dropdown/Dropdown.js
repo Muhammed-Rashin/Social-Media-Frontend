@@ -11,7 +11,7 @@ import instance from '../../api/axios';
 
 const ITEM_HEIGHT = 48;
 
-export default function Dropdown({ setPosts, id }) {
+export default function Dropdown({ setPostData, id }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -31,8 +31,8 @@ export default function Dropdown({ setPosts, id }) {
     }).then((willDelete) => {
       if (willDelete) {
         instance.post('/deletePost', { id }).then(() => {
-          instance.get('/getPosts').then(({ data }) => {
-            setPosts(data.posts);
+          instance.post('/getUserProfile').then(({ data }) => {
+            setPostData(data.posts);
           });
         });
         swal('Poof! Your imaginary file has been deleted!', {
@@ -71,7 +71,6 @@ export default function Dropdown({ setPosts, id }) {
           },
         }}
       >
-        <MenuItem>Edit</MenuItem>
         <MenuItem onClick={doDelete}>Delete</MenuItem>
       </Menu>
     </div>

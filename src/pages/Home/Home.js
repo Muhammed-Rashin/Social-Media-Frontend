@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import './Home.css';
 import Navbar from '../../components/Navbar/Navbar';
 import Sidebar from '../../components/Sidebar/Sidebar';
-import Stories from '../../components/Stories/Stories';
+// import Stories from '../../components/Stories/Stories';
 import CreatPost from '../../components/CreatPost/CreatPost';
 import Posts from '../../components/Posts/Posts';
 import Massages from '../../components/Massages/Massages';
@@ -11,6 +11,11 @@ import FriendRequests from '../../components/FriendRequests/FriendRequests';
 
 function Home() {
   const [posts, setPosts] = useState([]);
+  const [openChat, setOpenChat] = useState(false);
+  const [messageProfiles, setMessageProfiles] = useState([]);
+  const [onlineUsers, setOnlineUsers] = useState([]);
+  const [currentUser, setCurrentUser] = useState({});
+
   const elements = [
     {
       text: 'Home',
@@ -48,7 +53,19 @@ function Home() {
       <Navbar />
       <main>
         <div className="container">
-          <Sidebar elements={elements} create profile />
+          <Sidebar
+            elements={elements}
+            messageProfiles={messageProfiles}
+            setMessageProfiles={setMessageProfiles}
+            onlineUsers={onlineUsers}
+            setOnlineUsers={setOnlineUsers}
+            setCurrentUser={setCurrentUser}
+            currentUser={currentUser}
+            setOpenChat={setOpenChat}
+            openChat={openChat}
+            create
+            profile
+          />
           <div className="middle">
             {/* <Stories /> */}
             <CreatPost setPosts={setPosts} />
@@ -56,8 +73,13 @@ function Home() {
           </div>
 
           <div className="right">
-            <Massages />
-            <FriendRequests />
+            <Massages
+              messageProfiles={messageProfiles}
+              onlineUsers={onlineUsers}
+              setCurrentUser={setCurrentUser}
+              setOpenChat={setOpenChat}
+            />
+            {/* <FriendRequests /> */}
           </div>
         </div>
       </main>

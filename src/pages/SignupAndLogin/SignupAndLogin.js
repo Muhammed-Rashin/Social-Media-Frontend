@@ -153,9 +153,8 @@ function SignupAndLogin() {
                 'Verification Email Sented to ' + email,
                 'success',
               );
-            }
-            else{
-              toast.error('Something Went Wrong')
+            } else {
+              toast.error('Something Went Wrong');
             }
           });
       },
@@ -241,6 +240,9 @@ function SignupAndLogin() {
             <button className="sign-button" type="submit">
               Sign Up
             </button>
+            <p className="already-account">
+            Have an account? <span onClick={()=>setToggle(false)}>Log in</span>
+            </p>
           </form>
         </div>
         <div className="form-container sign-in-container">
@@ -276,6 +278,10 @@ function SignupAndLogin() {
             <button className="sign-button" type="submit">
               Sign In
             </button>
+
+            <p className="new-account">
+              Don't have an account?<span onClick={()=>setToggle(true)}> Sign up</span>
+            </p>
           </form>
         </div>
         <div className="overlay-container">

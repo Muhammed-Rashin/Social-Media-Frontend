@@ -86,3 +86,12 @@
     right: 0;
     
 }
+
+.message{
+    cursor: pointer;
+    transition: 0.4s;
+    border-radius: 8px;
+}
+.message:hover{
+    background-color: hsl(252, 30%, 90%);
+}

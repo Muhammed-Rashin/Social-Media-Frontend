@@ -1,7 +1,5 @@
 import * as React from 'react';
-import {
-  useEffect, useRef, useState, useContext,
-} from 'react';
+import { useEffect, useRef, useState, useContext } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { io } from 'socket.io-client';
@@ -10,11 +8,17 @@ import EmojiPicker from 'emoji-picker-react';
 import instance from '../../api/axios';
 import { UserContext } from '../../store/userContext';
 
-function Chat({ openChat, setOpenChat }) {
-  const [users, setUsers] = useState([]);
-  const [currentUser, setCurrentUser] = useState({});
+function Chat({
+  openChat,
+  setOpenChat,
+  messageProfiles,
+  setMessageProfiles,
+  setOnlineUsers,
+  onlineUsers,
+  currentUser,
+  setCurrentUser,
+}) {
   const [messageText, setMessageText] = useState('');
-  const [onlineUsers, setOnlineUsers] = useState([]);
   const [messages, setMessages] = useState([]);
   const [emojiVisiblity, setEmojiVisiblity] = useState(false);
   const scroll = useRef();
@@ -46,7 +50,10 @@ function Chat({ openChat, setOpenChat }) {
   }, [currentUser]);
 
   const confChat = () => {
-    socket.current = io('http://13.231.164.178:7000');
+    socket.current = io(
+      'https://chat.pradax.online'
+      // 'http://localhost:7000',
+    );
     socket.current.emit('new-user-add', userId);
     socket.current.on('get-users', (users) => {
       setOnlineUsers(users);
@@ -59,7 +66,7 @@ function Chat({ openChat, setOpenChat }) {
 
   useEffect(() => {
     instance.get('/getAllUsers').then(({ data }) => {
-      setUsers(data);
+      setMessageProfiles(data);
       setCurrentUser(data[0]);
       confChat();
     });
@@ -93,7 +100,7 @@ function Chat({ openChat, setOpenChat }) {
   }, [messages]);
 
   return (
-    <div>
+    <div className="chats-main">
       <Modal
         open={openChat}
         onClose={handleClose}
@@ -107,7 +114,8 @@ function Chat({ openChat, setOpenChat }) {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: 1000,
+            width: '100%',
+            maxWidth: '1000px',
             boxShadow: 24,
           }}
         >
@@ -117,15 +125,15 @@ function Chat({ openChat, setOpenChat }) {
                 <div className="wrap">
                   <img
                     id="profile-img"
-                    src={user.profileImg}
+                    src={
+                      user.profileImg
+                        ? user.profileImg
+                        : 'https://www.pngall.com/wp-content/uploads/5/Profile-PNG-File.png'
+                    }
                     className="online"
                     alt=""
                   />
                   <p>{user.username}</p>
-                  <i
-                    className="fa fa-chevron-down expand-button"
-                    aria-hidden="true"
-                  />
                 </div>
               </div>
               <div id="search">
@@ -136,12 +144,10 @@ function Chat({ openChat, setOpenChat }) {
               </div>
               <div id="contacts">
                 <ul>
-                  {users.map((user) => (
+                  {messageProfiles.map((user) => (
                     <li
                       onClick={() => setCurrentUser(user)}
-                      className={`contact ${
-                        user === currentUser && 'active'
-                      }`}
+                      className={`contact ${user === currentUser && 'active'}`}
                       key={user._id}
                     >
                       <div className="wrap">
@@ -149,13 +155,13 @@ function Chat({ openChat, setOpenChat }) {
                           (element) => element.userId === user._id,
                         ) ? (
                           <span className="contact-status online" />
-                          ) : null}
+                        ) : null}
                         <img
                           src={
-                              user.profileImg
-                                ? user.profileImg
-                                : 'https://www.pngall.com/wp-content/uploads/5/Profile-PNG-File.png'
-                            }
+                            user.profileImg
+                              ? user.profileImg
+                              : 'https://www.pngall.com/wp-content/uploads/5/Profile-PNG-File.png'
+                          }
                           alt=""
                         />
                         <div className="meta">
@@ -182,7 +188,7 @@ function Chat({ openChat, setOpenChat }) {
               </div>
               <div className="messages">
                 <ul>
-                  {messages.map((message,index) => (
+                  {messages.map((message, index) => (
                     <li
                       ref={scroll}
                       className={message.send ? 'sent' : 'replies'}
@@ -191,19 +197,19 @@ function Chat({ openChat, setOpenChat }) {
                       {message.send ? (
                         <img
                           src={
-                              user.profileImg
-                                ? user.profileImg
-                                : 'https://toppng.com/uploads/preview/instagram-default-profile-picture-11562973083brycehrmyv.png'
-                            }
+                            user.profileImg
+                              ? user.profileImg
+                              : 'https://toppng.com/uploads/preview/instagram-default-profile-picture-11562973083brycehrmyv.png'
+                          }
                           alt=""
                         />
                       ) : (
                         <img
                           src={
-                              currentUser.profileImg
-                                ? currentUser.profileImg
-                                : 'https://toppng.com/uploads/preview/instagram-default-profile-picture-11562973083brycehrmyv.png'
-                            }
+                            currentUser.profileImg
+                              ? currentUser.profileImg
+                              : 'https://toppng.com/uploads/preview/instagram-default-profile-picture-11562973083brycehrmyv.png'
+                          }
                           alt=""
                         />
                       )}

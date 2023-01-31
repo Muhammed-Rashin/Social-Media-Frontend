@@ -2,8 +2,24 @@ import React from 'react';
 import { Modal } from '@mui/material';
 import CollectionsOutlinedIcon from '@mui/icons-material/CollectionsOutlined';
 import './selectImages.css';
+import { Box } from '@mui/system';
 
 function SelectImages({ open, setOpen, setImage }) {
+  
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 600,
+  bgcolor: 'white',
+  boxShadow: 24,
+  borderRadius:'20px',
+  p: 4,
+  minWidth:'10px'
+};
+
+
   return (
     <Modal
       open={open}
@@ -12,7 +28,9 @@ function SelectImages({ open, setOpen, setImage }) {
       }}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
+      disableAutoFocus
     >
+      <Box sx={style}>
       <div className="select-media">
         <header className="select-media-header">
           <h4>Create New Post</h4>
@@ -38,6 +56,7 @@ function SelectImages({ open, setOpen, setImage }) {
           />
         </div>
       </div>
+      </Box>
     </Modal>
   );
 }

@@ -1,16 +1,26 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import './Sidebar.css';
 import { useNavigate } from 'react-router-dom';
-import image from '../../assets/dummyData/images/profile-7.jpg';
 import Chat from '../Chat/Chat';
 import { UserContext } from '../../store/userContext';
 
-function Sidebar({ elements, create, profile }) {
+function Sidebar({
+  elements,
+  create,
+  profile,
+  messageProfiles,
+  setMessageProfiles,
+  onlineUsers,
+  setOnlineUsers,
+  currentUser,
+  setCurrentUser,
+  openChat,
+  setOpenChat,
+}) {
   const user = useContext(UserContext);
 
   const navigate = useNavigate();
   const [active, setActive] = useState();
-  const [openChat, setOpenChat] = useState(false);
 
   return (
     <div>
@@ -29,14 +39,9 @@ function Sidebar({ elements, create, profile }) {
             </div>
             <div className="handle">
               <h4>
-                {user.firstName}
-                {' '}
-                {user.lastName}
+                {user.firstName} {user.lastName}
               </h4>
-              <p className="text-muted">
-                @
-                {user.username}
-              </p>
+              <p className="text-muted">@{user.username}</p>
             </div>
           </a>
         ) : null}
@@ -76,7 +81,16 @@ function Sidebar({ elements, create, profile }) {
           </label>
         ) : null}
       </div>
-      <Chat openChat={openChat} setOpenChat={setOpenChat} />
+      <Chat
+        openChat={openChat}
+        setOpenChat={setOpenChat}
+        messageProfiles={messageProfiles}
+        setMessageProfiles={setMessageProfiles}
+        onlineUsers={onlineUsers}
+        setOnlineUsers={setOnlineUsers}
+        setCurrentUser={setCurrentUser}
+        currentUser={currentUser}
+      />
     </div>
   );
 }
